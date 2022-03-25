@@ -1,5 +1,6 @@
 module.exports = {
   title: '记录',
+  base: '/blog',
   description: '记路',
   lastUpdated: true,
   markdown: {
