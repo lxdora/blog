@@ -35,7 +35,7 @@ jobs:
       
       - name: Deploy to Pages
         run: |
-          cd .vitepress/dist 
+          cd docs/.vitepress/dist 
           git init
           git config user.name "lxdora"
           git config user.email "${{ secrets.GIT_EMAIL }}"
