@@ -1,8 +1,6 @@
-<div id="jinrishici-sentence">
-</div>
+<div id="jinrishici-sentence"></div>
 
 <script>
-  import {onMounted, reactive } from 'vue';
   import {load} from 'jinrishici'
   const loadSentence = function() {
     load(result => {
