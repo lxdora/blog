@@ -153,7 +153,10 @@ silly-datetime 日期格式化模块
 
 第三方模块 mkdirp
 
-<font color="red">fs中的方法都是异步的</font>
+
+::: danger
+fs中的方法都是异步的
+:::
 
 ::: details
 ```js

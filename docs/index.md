@@ -1,6 +1,8 @@
-<div id="jinrishici-sentence"></div>
+<div id="jinrishici-sentence">
+</div>
 
 <script>
+  import {onMounted } from 'vue';
   import {load} from 'jinrishici'
   const loadSentence = function() {
     load(result => {
@@ -10,7 +12,9 @@
       shici = `获取诗词失败, ${err}`
     })
   }
-  loadSentence();
+  onMounted(()=>{
+    loadSentence();
+  })
 </script>
 
 <style>
