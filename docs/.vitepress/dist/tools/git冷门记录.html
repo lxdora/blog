@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>git冷门记录 | 记录</title>
+    <meta name="description" content="记路">
+    <link rel="stylesheet" href="/blog/assets/style.1f921807.css">
+    <link rel="modulepreload" href="/blog/assets/app.b31ce850.js">
+    <link rel="modulepreload" href="/blog/assets/tools_git冷门记录.md.af3a76b6.lean.js">
+    
+    <meta name="twitter:title" content="git冷门记录 | 记录">
+  <meta property="og:title" content="git冷门记录 | 记录">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme"><header class="nav-bar" data-v-3a869d86><div class="sidebar-button" data-v-3a869d86><svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" class></path></svg></div><a class="nav-bar-title" href="/blog/" aria-label="记录, back to home" data-v-3a869d86 data-v-7cd725e6><!----> 记录</a><div class="flex-grow" data-v-3a869d86></div><div class="nav" data-v-3a869d86><nav class="nav-links" data-v-3a869d86 data-v-2b434b30><!--[--><div class="item" data-v-2b434b30><div class="nav-link" data-v-2b434b30 data-v-938a09aa><a class="item" href="/blog/index" data-v-938a09aa>🏠 首页 <!----></a></div></div><div class="item" data-v-2b434b30><div class="nav-link" data-v-2b434b30 data-v-938a09aa><a class="item" href="/blog/more/docs" data-v-938a09aa>📅 归档 <!----></a></div></div><div class="item" data-v-2b434b30><div class="nav-link" data-v-2b434b30 data-v-938a09aa><a class="item" href="/blog/more/tags" data-v-938a09aa>📂 分类 <!----></a></div></div><div class="item" data-v-2b434b30><div class="nav-link" data-v-2b434b30 data-v-938a09aa><a class="item" href="/blog/more/Friendship" data-v-938a09aa>👫 友情链接 <!----></a></div></div><!--]--><!----><!----></nav></div><!--[--><!--]--></header><aside class="sidebar" data-v-fa592f86><nav class="nav-links nav" data-v-fa592f86 data-v-2b434b30><!--[--><div class="item" data-v-2b434b30><div class="nav-link" data-v-2b434b30 data-v-938a09aa><a class="item" href="/blog/index" data-v-938a09aa>🏠 首页 <!----></a></div></div><div class="item" data-v-2b434b30><div class="nav-link" data-v-2b434b30 data-v-938a09aa><a class="item" href="/blog/more/docs" data-v-938a09aa>📅 归档 <!----></a></div></div><div class="item" data-v-2b434b30><div class="nav-link" data-v-2b434b30 data-v-938a09aa><a class="item" href="/blog/more/tags" data-v-938a09aa>📂 分类 <!----></a></div></div><div class="item" data-v-2b434b30><div class="nav-link" data-v-2b434b30 data-v-938a09aa><a class="item" href="/blog/more/Friendship" data-v-938a09aa>👫 友情链接 <!----></a></div></div><!--]--><!----><!----></nav><!--[--><!--]--><ul class="sidebar-links" data-v-fa592f86><!--[--><li class="sidebar-link"><p class="sidebar-link-item">HTML</p><!----></li><li class="sidebar-link"><p class="sidebar-link-item">CSS</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/blog/css/css冷门记录">css常用样式</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">JavaScript</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/blog/javascript/nodeJs">nodeJs的使用</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">Vue</p><!----></li><li class="sidebar-link"><p class="sidebar-link-item">工具</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/blog/tools/element-ui不常规用法">element-ui自定义修改</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item active" href="/blog/tools/git冷门记录">git的使用</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/blog/tools/RESTful风格">Restful</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/blog/tools/uniapp">uni-app问题记录</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">其他</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/blog/other/frontmatter">Restful</a><!----></li></ul></li><!--]--></ul><!--[--><!--]--></aside><div class="sidebar-mask"></div><main class="page" data-v-f36ea516><div class="container" data-v-f36ea516><!--[--><!--]--><div style="position:relative;" class="content" data-v-f36ea516><div><p>根据二八法则，通常我们可以用20%的知识解决80%的问题，git的使用也是这样。常用的命令翻来覆去就那么几个，但是当我们遇到比较难处理的问题时，也要能会用其他80%中的知识，本文用于记录日常工作不常遇到的git问题，持续更新。</p><h1 id="git常用命令" tabindex="-1">git常用命令 <a class="header-anchor" href="#git常用命令" aria-hidden="true">#</a></h1><p>简单列举，不再赘述</p><ol><li><code>git add .</code></li><li><code>git commit -m &#39;&#39;</code></li><li><code>git pull</code></li><li><code>git push origin HEAD</code></li><li><code>git branch -a</code></li><li><code>git checkout -b localBranch origin/master</code> 从远程master分支拉出本地分支</li><li><code>git branch --set-upstream-to=origin/master </code> 设置当前分支追踪远程master分支</li><li><code>git branch -vvv</code> 查看本地分支与远程分支的映射关系</li></ol><h1 id="git不常用" tabindex="-1">git不常用 <a class="header-anchor" href="#git不常用" aria-hidden="true">#</a></h1><ol><li>文件名大小写修改后git检测不到</li></ol><p>执行<code>git config core.ignorecase false</code>，关闭git忽略大小写配置，即可检测到大小写名称更改</p><ol start="2"><li>git远程分支删除后本地分支还在，不想一个个删除</li></ol><p>执行<code>git remote prune origin</code></p><ol start="3"><li><p>git添加和更新子模块</p><p><code>git submodule add git@git.hoge.cn:microfed/library.git src/library</code></p><p><code>git submodule update --init --recursive</code></p><p>添加子模块报错</p><p><code>&#39;src/library&#39; already exists in the index</code></p><p>执行如下命令</p><p><code>git rm -r --cached src/library</code></p></li><li><p>git 删除远程分支</p><p><code> git push origin --delete new_a</code></p></li><li><div class="language-shell line-numbers-mode"><pre><code><span class="token comment">#指定远程分支时报错，已经存在</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin git@git.hoge.cn:microfed/low_code.git
+error: remote origin already exists.
+<span class="token comment"># 先删除</span>
+<span class="token function">git</span> remote <span class="token function">rm</span> origin
+<span class="token comment"># 再添加</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin git@git.hoge.cn:microfed/low_code.git
+git@gitlab.com:lxdora/low_code.git
+ 
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div></li></ol><h1 id="在本地同时关联github-gitlab-gitee" tabindex="-1">在本地同时关联github, gitlab, gitee <a class="header-anchor" href="#在本地同时关联github-gitlab-gitee" aria-hidden="true">#</a></h1><ol><li><p>cd <code>~/.ssh</code>目录下，分别建立对应的文件夹</p><div class="language-shell line-numbers-mode"><pre><code><span class="token function">ls</span> ~/.ssh
+<span class="token operator">&gt;</span> github   gitlab   gitee
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li><li><p>执行三次ssh-keygen, 分别保存到对应的目录下</p><div class="language-shell line-numbers-mode"><pre><code>ssh-keygen -t rsa -C <span class="token string">&quot;注册 gitlab 账户的邮箱&quot;</span>
+ssh-keygen -t rsa -C <span class="token string">&quot;注册 github 账户的邮箱&quot;</span>
+ssh-keygen -t rsa -C <span class="token string">&quot;注册 gitee 账户的邮箱&quot;</span>
+
+保存路径要输入全路径
+Enter <span class="token function">file</span> <span class="token keyword">in</span> <span class="token function">which</span> to save the key <span class="token punctuation">(</span>/Users/hoge/.ssh/id_rsa<span class="token punctuation">)</span>: /Users/hoge/.ssh/gitee/id_rsa
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></li><li><p>将对应目录下的id_rsa.pub的内容复制到对应网站上</p></li><li><p>修改配置文件 <code>vim ~/.ssh/config</code></p><div class="language-shell line-numbers-mode"><pre><code><span class="token comment"># The git info for github</span>
+Host github.com
+HostName github.com
+User <span class="token number">1061522566</span>@qq.com
+IdentityFile ~/.ssh/github/id_rsa
+
+<span class="token comment"># The git info for gitlab</span>
+Host gitlab.com
+HostName gitlab.com
+User <span class="token number">1061522566</span>@qq.com
+IdentityFile ~/.ssh/gitlab/id_rsa
+
+<span class="token comment"># The git info for gitee</span>
+Host gitee.com
+HostName gitee.com
+User <span class="token number">1061522566</span>@qq.com
+IdentityFile ~/.ssh/gitee/id_rsa
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div></li><li><p>测试一下是否连通</p><div class="language-shell line-numbers-mode"><pre><code><span class="token function">ssh</span> -T git@github.com
+<span class="token function">ssh</span> -T git@gitlab.com
+<span class="token function">ssh</span> -T git@gitee.com
+
+能看到自己的用户名，说明连通了
+如果看到下述信息，需要输入以下yes
+The authenticity of <span class="token function">host</span> <span class="token string">&#39;gitee.com (180.97.125.228)&#39;</span> can<span class="token string">&#39;t be established.
+ECDSA key fingerprint is SHA256:FQGC9Kn/eye1W8icdBgrQp+KkGYoFgbVr17bmjey0Wc.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added &#39;</span>gitee.com,180.97.125.228<span class="token string">&#39; (ECDSA) to the list of known hosts.
+Hi lxdora! You&#39;</span>ve successfully authenticated, but GITEE.COM does not provide shell access.
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div></li></ol><h1 id="git将本地分支推送到多个远程" tabindex="-1">git将本地分支推送到多个远程 <a class="header-anchor" href="#git将本地分支推送到多个远程" aria-hidden="true">#</a></h1><ol><li><p>使用命令</p><div class="language-shell line-numbers-mode"><pre><code><span class="token comment"># 添加第一个远程仓库</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin https://git.oschina.net/Jicklin/bokeyuan.git
+<span class="token comment"># 继续添加远程仓库</span>
+<span class="token function">git</span> remote set-url --add origin https://github.com/jicklin/bokeyuan.git
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div></li><li><p>上面命令执行后是修改了.git/config文件，也可以直接修改这个配置文件</p><div class="language-shell line-numbers-mode"><pre><code><span class="token punctuation">[</span>remote <span class="token string">&quot;origin&quot;</span><span class="token punctuation">]</span>
+    url <span class="token operator">=</span> git@gitlab.com:lxdora/xingyun-cli.git
+    fetch <span class="token operator">=</span> +refs/heads/*:refs/remotes/origin/*
+    url <span class="token operator">=</span> git@git.hoge.cn:microfed/xingyun-cli.git
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div></li></ol><h1 id="git命令行别名" tabindex="-1">git命令行别名 <a class="header-anchor" href="#git命令行别名" aria-hidden="true">#</a></h1><p>vim ~/.gitconfig</p><div class="language-shell line-numbers-mode"><pre><code><span class="token punctuation">[</span>core<span class="token punctuation">]</span>
+	excludesfile <span class="token operator">=</span> /Users/hoge/.gitignore_global
+<span class="token punctuation">[</span>difftool <span class="token string">&quot;sourcetree&quot;</span><span class="token punctuation">]</span>
+	cmd <span class="token operator">=</span> opendiff <span class="token punctuation">\</span>&quot;<span class="token variable">$LOCAL</span><span class="token punctuation">\</span>&quot; <span class="token punctuation">\</span>&quot;<span class="token variable">$REMOTE</span><span class="token punctuation">\</span>&quot;
+	path <span class="token operator">=</span>
+<span class="token punctuation">[</span>mergetool <span class="token string">&quot;sourcetree&quot;</span><span class="token punctuation">]</span>
+	cmd <span class="token operator">=</span> /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh <span class="token punctuation">\</span>&quot;<span class="token variable">$LOCAL</span><span class="token punctuation">\</span>&quot; <span class="token punctuation">\</span>&quot;<span class="token variable">$REMOTE</span><span class="token punctuation">\</span>&quot; -ancestor <span class="token punctuation">\</span>&quot;<span class="token variable">$BASE</span><span class="token punctuation">\</span>&quot; -merge <span class="token punctuation">\</span>&quot;<span class="token variable">$MERGED</span><span class="token punctuation">\</span>&quot;
+	trustExitCode <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token punctuation">[</span>user<span class="token punctuation">]</span>
+	name <span class="token operator">=</span> 李翔
+<span class="token punctuation">[</span>pull<span class="token punctuation">]</span>
+	rebase <span class="token operator">=</span> <span class="token boolean">false</span>
+<span class="token punctuation">[</span>alias<span class="token punctuation">]</span>
+br <span class="token operator">=</span> branch
+ci <span class="token operator">=</span> commit
+cl <span class="token operator">=</span> clone
+co <span class="token operator">=</span> checkout
+<span class="token function">cp</span> <span class="token operator">=</span> cherry-pick
+cfg <span class="token operator">=</span> clone
+<span class="token function">df</span> <span class="token operator">=</span> <span class="token function">diff</span>
+fh <span class="token operator">=</span> fetch
+lg <span class="token operator">=</span> <span class="token string">&quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit --date=relative&quot;</span>
+mg <span class="token operator">=</span> merge
+pl <span class="token operator">=</span> pull
+plr <span class="token operator">=</span> pull --rebase
+rb <span class="token operator">=</span> rebase
+ph <span class="token operator">=</span> push origin HEAD
+rmt <span class="token operator">=</span> remote
+rst <span class="token operator">=</span> reset
+<span class="token function">sh</span> <span class="token operator">=</span> stash
+st <span class="token operator">=</span> status
+sts <span class="token operator">=</span> status -s
+sbm <span class="token operator">=</span> submodule
+sw <span class="token operator">=</span> show
+swf <span class="token operator">=</span> <span class="token string">&quot;show --name-status&quot;</span>
+delb <span class="token operator">=</span> <span class="token string">&quot;push origin --delete&quot;</span>
+delt <span class="token operator">=</span> <span class="token string">&quot;push origin :&quot;</span>
+mb <span class="token operator">=</span> merge-base
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br></div></div><h1 id="git初始化时add了错误的文件" tabindex="-1">git初始化时add了错误的文件 <a class="header-anchor" href="#git初始化时add了错误的文件" aria-hidden="true">#</a></h1><p>当我们初始化一个项目的git，这时可能项目下没有.gitignore文件，然后不小心执行了<code>git add .</code>，这时候将整个node_modules文件都add了，这种情况下可以执行<code>git reset</code>撤销该错误的add</p></div></div><footer class="page-footer" data-v-f36ea516 data-v-33693d1a><div class="edit" data-v-33693d1a><div class="edit-link" data-v-33693d1a data-v-94e14a74><!----></div></div><div class="updated" data-v-33693d1a><p class="last-updated" data-v-33693d1a data-v-79749cd8><span class="prefix" data-v-79749cd8>Last Updated:</span><span class="datetime" data-v-79749cd8></span></p></div></footer><div class="next-and-prev-link" data-v-f36ea516 data-v-a0b227e4><div class="container" data-v-a0b227e4><div class="prev" data-v-a0b227e4><a class="link" href="/blog/tools/element-ui不常规用法" data-v-a0b227e4><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-prev" data-v-a0b227e4><path d="M19,11H7.4l5.3-5.3c0.4-0.4,0.4-1,0-1.4s-1-0.4-1.4,0l-7,7c-0.1,0.1-0.2,0.2-0.2,0.3c-0.1,0.2-0.1,0.5,0,0.8c0.1,0.1,0.1,0.2,0.2,0.3l7,7c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3c0.4-0.4,0.4-1,0-1.4L7.4,13H19c0.6,0,1-0.4,1-1S19.6,11,19,11z"></path></svg><span class="text" data-v-a0b227e4>element-ui自定义修改</span></a></div><div class="next" data-v-a0b227e4><a class="link" href="/blog/tools/RESTful风格" data-v-a0b227e4><span class="text" data-v-a0b227e4>Restful</span><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-next" data-v-a0b227e4><path d="M19.9,12.4c0.1-0.2,0.1-0.5,0-0.8c-0.1-0.1-0.1-0.2-0.2-0.3l-7-7c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l5.3,5.3H5c-0.6,0-1,0.4-1,1s0.4,1,1,1h11.6l-5.3,5.3c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l7-7C19.8,12.6,19.9,12.5,19.9,12.4z"></path></svg></a></div></div></div><!--[--><!--]--></div></main></div><!----><!--]--></div>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"css_css冷门记录.md\":\"aadf20b7\",\"index.md\":\"33a97a3c\",\"javascript_nodejs.md\":\"d88998d9\",\"more_docs.md\":\"66d0edf2\",\"more_index.md\":\"3a8aae2c\",\"more_tags.md\":\"c1dfff22\",\"tools_restful风格.md\":\"0c0aacc4\",\"tools_element-ui不常规用法.md\":\"63ba7a2b\",\"tools_git冷门记录.md\":\"af3a76b6\",\"tools_uniapp.md\":\"81ab34ad\"}")</script>
+    <script type="module" async src="/blog/assets/app.b31ce850.js"></script>
+    
+  </body>
+</html>

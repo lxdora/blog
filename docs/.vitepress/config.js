@@ -1,19 +1,31 @@
-module.exports = {
-  title: '记录',
-  base: '/blog',
-  description: '记路',
-  lastUpdated: true,
-  markdown: {
-    lineNumbers: true
-  },
-  themeConfig: {
-    docsDir: 'docs',
-    docsBranch: 'main',
-    lastUpdated: 'Last Updated',
-    sidebar: {
-      '/': getSidebar()
+const env = process.env.NODE_ENV === "development" ? "" : "/blog"
+import getPages from './utils/pages'
+
+async function getConfig() {
+  let config =  {
+    title: '记录',
+    base: env,
+    description: '记路',
+    lastUpdated: true,
+    markdown: {
+      lineNumbers: true
+    },
+    themeConfig: {
+      docsDir: 'docs',
+      docsBranch: 'main',
+      lastUpdated: 'Last Updated',
+      sidebar: {
+        '/': getSidebar()
+      },
+      pages: await getPages(),
+      nav: [
+        { text: "🏠 首页", link: "/index" },
+        { text: "📅 归档", link: "/more/docs" },
+        { text: "📂 分类", link: "/more/tags" },
+      ],
     }
   }
+  return config;
 }
 
 function getSidebar() {
@@ -59,7 +71,7 @@ function getSidebar() {
        
       ]
     },
-    
-
   ]
 }
+
+module.exports = getConfig();
