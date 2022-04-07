@@ -10,6 +10,7 @@
     "deploy": "bash ./deploy.sh"
   },
   "devDependencies": {
+    "@vuepress/plugin-nprogress": "^1.9.7",
     "vitepress": "^0.22.3"
   },
   "dependencies": {

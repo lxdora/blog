@@ -7,6 +7,24 @@ async function getConfig() {
     base: env,
     description: '记路',
     lastUpdated: true,
+    plugins: [
+      '@vuepress/back-to-top',
+      '@vuepress/medium-zoom',
+      '@vuepress/nprogress',
+    [
+      '@vuepress/plugin-search',
+      {
+        locales: {
+          '/': {
+            placeholder: 'Search',
+          },
+          '/zh/': {
+            placeholder: '搜索',
+          },
+        },
+      },
+    ],
+  ],
     markdown: {
       lineNumbers: true
     },

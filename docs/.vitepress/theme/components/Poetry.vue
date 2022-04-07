@@ -36,7 +36,6 @@
       }
       fragment.append(content);
       jinrishici.append(fragment);
-      console.log({shici});
     }, err => {
       document.querySelector('#jinrishici').innerHTML = `获取诗词失败, ${err}`
     })

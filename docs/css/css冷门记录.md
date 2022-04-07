@@ -174,7 +174,7 @@ button:before {
 ```
 
 # 滚动条样式
-::: details Click me to view the code
+::: details 
 ```css
 ::-webkit-scrollbar {
   width: 6px;
@@ -199,4 +199,29 @@ button:before {
   background-color: rgba(204,204,204, 1);
   }
 ```
+:::
+
+# 翻转动画
+
+::: details
+
+需要显示的添加flip-over类，不需要显示的添加flip-down类
+
+```css
+.flip-down {
+    transform:translate3d(0,0,0);
+    transition:all .5s ease-in-out;
+    transform-style:preserve-3d;
+    backface-visibility:hidden;
+    transform:rotateY(180deg);
+  }
+  .flip-over {
+    transform:translate3d(0,0,0);
+    transition:all .5s ease-in-out;
+    transform-style:preserve-3d;
+    backface-visibility:hidden;
+    transform:rotateY(360deg);
+  }
+```
+
 :::
