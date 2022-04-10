@@ -1,4 +1,4 @@
-const env = process.env.NODE_ENV === "development" ? "" : "/blog"
+const env = process.env.NODE_ENV === "development" ? "" : ""
 import getPages from './utils/pages'
 
 async function getConfig() {
