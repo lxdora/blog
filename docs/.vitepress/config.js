@@ -1,10 +1,8 @@
-const env = process.env.NODE_ENV === "development" ? "" : ""
 import getPages from './utils/pages'
 
 async function getConfig() {
   let config =  {
     title: '记录',
-    base: env,
     description: '记路',
     lastUpdated: true,
     plugins: [
@@ -69,7 +67,7 @@ function getSidebar() {
     {
       text: 'Vue',
       children: [
-        
+        { text: 'Vue.js设计与实现读书笔记', link: '/vue/Vue.js设计与实现' },
       ]
     },
     {

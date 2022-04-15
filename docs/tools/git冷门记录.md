@@ -52,7 +52,11 @@ categories:
 
    ` git push origin --delete new_a`
 
-5. ```shell
+4. git查看远程仓库地址
+
+   `git remote -v`
+
+6. ```shell
    #指定远程分支时报错，已经存在
    git remote add origin git@git.hoge.cn:microfed/low_code.git
    error: remote origin already exists.
@@ -195,3 +199,15 @@ mb = merge-base
 # git初始化时add了错误的文件
 
 当我们初始化一个项目的git，这时可能项目下没有.gitignore文件，然后不小心执行了`git add .`，这时候将整个node_modules文件都add了，这种情况下可以执行`git reset`撤销该错误的add
+
+# git对比两个分支的差异
+
+```shell
+# 查看dev分支有而master分支没有的
+git log dev ^master
+# 查看dev比master多提交了哪些内容
+git log master..dev
+# 不知道dev和master哪个提交的多，单纯对比两个分支
+git log master...develop
+```
+

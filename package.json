@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development vitepress dev docs",
+    "dev": "vitepress dev docs",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs",
     "deploy": "bash ./deploy.sh"
@@ -14,7 +14,6 @@
     "vitepress": "^0.22.3"
   },
   "dependencies": {
-    "cross-env": "^7.0.3",
     "globby": "^13.1.1",
     "gray-matter": "^4.0.3",
     "jinrishici": "^1.0.6",
