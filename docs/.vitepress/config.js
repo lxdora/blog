@@ -77,6 +77,8 @@ function getSidebar() {
         { text: 'git的使用', link: '/tools/git冷门记录' },
         { text: 'Restful', link: '/tools/RESTful风格' },
         { text: 'uni-app问题记录', link: '/tools/uniapp' },
+        { text: 'nginx的使用', link: '/tools/nginx的使用' },
+        { text: 'linux常用命令', link: '/tools/linux常用命令' },
         
       ]
     },
