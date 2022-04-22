@@ -107,10 +107,98 @@ created(){
       在vue的package.json文件中可以看到如下配置
 
       ```js
+      "main": "dist/vue.runtime.common.js",
+      "module": "dist/vue.runtime.esm.js",
       ```
 
-      
+      可以知道，ESM资源默认是给rollup.js或webpack等打包工具使用的，而带有browser字样的ESM资源是直接给`<script type='module'>使用的`
 
-   3. 
+   3. 除了可以使用`<script>`标签引入资源外，还希望可以在Node.js中通过require语句引用资源， `const Vue = require('vue')`,这个主要用于服务端渲染(SSR)。当进行服务端渲染时，Vue.js的代码是在Node环境中执行的，而非浏览器环境， Node环境中资源的模块格式是CommonJS(cjs), 同样可以通过配置`format:'cjs'`输出这样的资源
 
-   4. 
+5. 特性开关
+
+   > 通常框架给我们提供了大量的特性，而我们可能并不需要所有的特性，这时，如果提供一个特性开关，就能够通过控制特性开关，将不需要的特性排除，从而减小最终的资源的体积。
+   >
+   > 例如：
+   >
+   > Vue3推荐使用组合式api，而Vue2是使用选项式api的，且Vue3兼容了Vue2，因此，当我们使用Vue3进行开发时，如果我们确认不会使用选项式的api，就可以将该特性关闭。在Vue中，该特性开关为__VUE_OPTIONS_API,可以通过如下代码控制特性开关
+   >
+   > ```js
+   > new webpack.DefinePlugin({
+   >   __VUE_OPtiONS_API: JSON.stringify(false) //关闭该特性
+   > })
+   > ```
+
+6. 错误处理
+
+   ```js
+   let handleError = null;
+   export default {
+     foo(fn){
+       callWithErrorHandling(fn);
+     }
+     //用户可以调用该函数注册统一的错误处理函数
+     registerErrorHandler(fn){
+       handleError = fn
+     }
+   }
+   
+   function callWithErrorHandling(fn){
+     try{
+       fn & fn()
+     }catch(e){
+       //将捕获到的错误传递给用户的错误处理程序
+       handlerError(e)
+     }
+   }
+   ```
+
+   提供了registerErrorHandler函数，用户可以调用它注册错误处理程序，然后在callWithErrorHandling函数内部捕获错误后，将错误传递给用户注册的错误处理程序， 这就是Vue.js错误处理的原理，在Vue中，也可以注册统一的错误处理函数
+
+   ```js
+   import App from 'App.vue'
+   const app = createApp(App)
+   app.config.errorHandler = ()=>{
+     //错误处理程序
+   }
+   ```
+
+## Vue.js3的设计思路
+
+1. Vue.js3是一个声明式的UI框架，通常，描述UI有两种方法
+
+   - 使用模板
+
+     ```html
+     <div onClick="handler"> <span></span> </div>
+     ```
+
+   - 使用JavaScript对象
+
+     ```js
+     const ui = {
+       tag: div,
+       props: {
+         onClick: handler
+       },
+       children: [
+         {tag: span}
+       ]
+     }
+     ```
+
+   那么这两种方式有何不同呢？使用JavaScript对象描述UI更加灵活。
+
+   > 例如，有几个不同级别的标签h1~h3
+   >
+   > 如果使用JavaScript对象
+   >
+   > let level = 1;
+   >
+   > const ui = {
+   >
+   >  tag: `h${level}`
+   >
+   > }
+   >
+   > 而使用模板的话，

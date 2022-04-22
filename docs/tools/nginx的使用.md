@@ -50,6 +50,8 @@ categories:
    ```
 
    :::
+   
+3. 执行`nginx -V`能够看到nginx相关的信息，如日志存放目录等
 
 ## WSL安装（ubuntu）
 
