@@ -79,3 +79,74 @@ date: 2022-02-15 15:25:43
 
   调用`plus.runtime.quit()`
 
+- uni-app上传图片， 视频，文件等
+
+  ::: details uni-app上传
+
+  ```js
+  async afterReadImg(event){
+  				const fileList = event.file.map(item=>item.url)
+  				const res = await this.uploadFileList(fileList, 'image');
+  				this.imageList = res.map(item=>{return {url: item.data.file_url}})
+  			},
+  			deleteImg(event){
+  				this.imageList.splice(event.index, 1);
+  			},
+  			async afterReadVideo(event){
+  				const res = await this.uploadFile(event.file.url, 'video');
+  				this.videoList = [{url: res.data.file_url}];
+  				this.content_video = res.data;
+  			},
+  			deleteVideo(event){
+  				this.videoList = [];
+  				this.content_video = {};
+  			},
+  			async uploadFile (filePath, type) {
+  				uni.showLoading({
+  					title: '上传中'
+  				})
+  				const globalData = getApp().globalData;
+  				let access_token = globalData.userInfo.userTokenKey || '';
+  				let headerInfo = globalData.headerInfo;
+  				headerInfo['X-API-ACCESS-TOKEN'] = access_token;
+  				let host = globalData.host;
+  				let url = `${host}/api/apiroute.php?route=card/upload_attach&uploadfield=${type}&format=json&m=attach&fromm=card`
+  				const res = await uni.uploadFile({
+  					url,
+  					filePath: filePath,
+  					header: headerInfo,
+  					name: 'file',
+  				})
+  				uni.hideLoading();
+  				console.log({res})
+  				return JSON.parse(res[1].data);
+  			},
+  			async uploadFileList (fileList, type) {
+  				uni.showLoading({
+  					title: '上传中'
+  				})
+  				const globalData = getApp().globalData;
+  				let access_token = globalData.userInfo.userTokenKey || '';
+  				let headerInfo = globalData.headerInfo;
+  				headerInfo['X-API-ACCESS-TOKEN'] = access_token;
+  				let host = globalData.host;
+  				let url = `${host}/api/apiroute.php?route=card/upload_attach&uploadfield=${type}&format=json&m=attach&fromm=card`
+  				const resList = []
+  				for(const item of fileList){
+  					const res = await uni.uploadFile({
+  						url,
+  						filePath: item,
+  						header: headerInfo,
+  						name: 'file',
+  					})
+  					resList.push(JSON.parse(res[1].data));
+  				}
+  				uni.hideLoading();
+  				return resList;
+  			},
+  ```
+
+  
+
+  :::
+
