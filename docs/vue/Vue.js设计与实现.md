@@ -191,14 +191,336 @@ created(){
 
    > 例如，有几个不同级别的标签h1~h3
    >
-   > 如果使用JavaScript对象
+   > 如果使用JavaScript对象，只需要修改level值就行
    >
    > let level = 1;
    >
    > const ui = {
    >
-   >  tag: `h${level}`
+   > tag: `h${level}`
    >
    > }
    >
-   > 而使用模板的话，
+   > 而使用模板的话，就必须穷举所有的情况
+   >
+   > \<h1 v-if="level===1">\</h1>
+   >
+   > \<h2 v-if="level===2">\</h2>
+   >
+   > \<h3 v-if="level===3">\</h3>
+   
+   可以看出，使用JavaScript对象来描述UI的方式更加灵活，而使用JavaScript对象描述UI就是所谓的虚拟DOM。在Vue组件中手写的渲染函数就是使用虚拟DOM来描述UI的。
+   
+   ```vue
+   import {h} from 'vue'
+   export default {
+   render(){
+   	return h('h1'. {onClick: handler})  //虚拟DOM
+   }
+   }
+   ```
+   
+   h函数的返回值是一个对象，其作用是让我们编写虚拟DOM更加轻松。__h函数是一个辅助创建虚拟DOM的工具函数。__ 
+   
+   什么是组件的渲染函数？一个组件要渲染的内容是通过渲染函数来描述的，Vue会根据这个组件的渲染函数的返回值拿到虚拟DOM，然后就可以把组件的内容渲染出来了。
+
+2. 渲染器
+
+   虚拟DOM是如何变成真实DOM并渲染到浏览器界面的呢？ 这就使用到了渲染器，渲染器的作用就是把虚拟DOM渲染成真实DOM。
+
+   假设有如下虚拟DOM：
+
+   ```js
+   const vnode = {
+       tag: 'div',
+       props: {
+           onClick: ()=>alert('123'),
+           
+       },
+       children: [
+           {
+               tag: 'span',
+               props: {}.
+               children: 'hello world'
+           }
+       ]
+   }
+   ```
+
+   可以看出是有一个div标签，上面绑定了一个click事件，然后还有一个子span标签，内容为hello world, 接下来就是编写一个渲染器，将这个虚拟DOM渲染为真实DOM
+
+   ::: details
+
+   ```js
+   function render(vnode, container){
+       //使用vnode的tag作为标签名创建dom元素
+       const el = document.createElement(vnode.tag);
+       //遍历vnode的props， 将属性，事件添加到dom元素
+       for(const key in vnode.props){
+           if(/^on/.test(key)){
+               //如果key以on开头，则认为是事件
+               el.addEventListener(key.subString(2).toLowerCase(), vnode.props[key])
+           }
+       }
+       //处理children
+   	if(typeof vnode.children === 'string'){
+           //如果children是一个字符串，则说明其是文本元素
+           el.appendChild(document.createTextNode(vnode.children))
+       }else if(vnode.children instenceof Array){
+           //如果是一个数组，递归调用
+           render(vnode.children, el);
+       }
+       //将元素添加到挂载点下
+       container.appendChile(el);
+   }
+   ```
+
+   :::
+
+   上面的render函数接受两个参数， 一个是虚拟DOM对象， 另一个是真实DOM元素，作为挂载点，渲染器会把虚拟DOM渲染到该挂载点下。
+
+   以上渲染器所作的操作是创建节点，渲染器更重要的作用是在更新节点上， 加入以上的vnode发生了变化
+
+   ```js
+   const vnode = {
+       tag: 'div',
+       props: {
+           onClick: ()=>alert('123'),
+           
+       },
+       children: [
+           {
+               tag: 'span',
+               props: {}.
+               children: 'good bye'
+           }
+       ]
+   }
+   ```
+
+   文本内容从hello world 变成了 good bye,那么渲染器应该能够识别出哪里发生了变化并且只更新变化的部分，而不需要重新走一遍创建的流程。
+
+3. 组件的本质
+
+   __虚拟DOM就是用来描述真实DOM的普通JavaScript对象，渲染器会把这个对象渲染为真实的DOM__。
+
+   虚拟DOM除了能够描述真实DOM，还可以用来描述组件， 组件是什么？__组件就是一组DOM元素的封装__。
+
+   ```js
+   const MyComponent = function(){
+       return {
+           tag: 'div',
+           props: {
+               onClick: ()=>alert('123')
+           },
+           children: 'hello component'
+       }
+   }
+   ```
+
+   vnode的tag可以用来描述普通的html标签，也可以用来描述组件，支持渲染组建的render函数如下：
+   
+   ```js
+   function render(vnode, container){
+       if(typeof vnode.tag === 'string'){
+           renderElement(vnode, container)
+       }else if (typeof vnode.tag === 'function'){
+           renderComponent(vnode, container)
+       }
+   }
+   ```
+
+4. 编译器
+
+   当我们提供虚拟DOM给Vue时，Vue可以使用渲染器将虚拟DOM渲染成真实DOM，但是如果提供虚拟DOM，对开发来说很不方便，因此Vue给我们提供了模板。编译器的作用就是将模板编译为渲染函数。一个.vue文件就是一个组件，其中template中的内容就是模板内容，编译器会将模板内容编译成渲染函数并添加到\<script>标签块的组件对象上。
+
+   ```vue
+   <template>
+   	<div @click="()=>alert(123)">
+           hello world
+       </div>
+   </template>
+   export default {
+   	data(){return {}},
+   	methods: {}
+   }
+   ```
+
+   最终在浏览器中运行的代码如下
+
+   ```js
+   export default {
+       data(){return{}},
+       methods: {},
+       render(){
+           return h('div', {onClick: ()=>alert(123), 'hello world'})
+       }
+   }
+   ```
+
+
+# 响应系统
+
+## 响应系统作用与实现
+
+1. 副作用函数是指会产生副作用的函数，如下
+
+   ```js
+   const data = {name: '张三'}
+   function effect(){
+       document.body.innerHTML = data.name
+   }
+   ```
+
+   effect函数执行后，innerHTML被设为data.name， 那么所有其他需要读取innerHTML的地方都受到了影响，因此effect函数就称为副作用函数。当data的name属性值发生改变后，希望effect函数能够再次执行，以保证innerHTML的数据是最新的，如果能够实现这个目标，data数据就被称为响应式数据。
+
+   那么如何实现这个目标呢？可以通过拦截对data的属性的读取和设置操作，在ES2015之前，只能使用`Object.defineProperty`（Vue2就使用了这种方式）, 之后则可以使用代理对象Proxy来实现（Vue3使用这种方式）。
+
+   ::: details 响应式系统工作原理
+
+   ```js
+   const bucket = new Set();
+   const data = {name: '张三'},
+   //代理
+   const prosyData = new Proxy(data, {
+       //拦截读取操作
+       get(target, key){
+           //将副作用函数effect添加到bucket中
+           bucket.add(effect)
+           return target[key]
+       },
+       set(target, key, val){
+   	    target[key] = val;
+           //依次执行副作用函数
+       	bucket.forEach(fn=>fn());
+           //返回true代表设置操作成功
+           return true;
+   }
+   })
+   ```
+
+   :::
+
+   可以看出， 一个响应式系统的工作流程为：
+   
+   - 当读取操作发生时，将副作用函数收集到桶中
+   - 当设置操作发生时，从桶中取出副作用函数并执行
+   
+   上面将副作用函数命名为effect， 但是实际中的副作用函数可能是任意名称的,因此，我们需要一个注册副作用函数的机制。
+   
+   ::: details 注册副作用函数
+   
+   ```js
+   let activeEffect;
+   function effect(fn){
+       activeEffect = fn;
+       fn();
+   }
+   ```
+   
+   此时加入用一个匿名的副作用函数，将使用effect进行注册。
+   
+   ```js
+   effect(()=>{
+       document.body.innerHTML = data.name
+   })
+   //响应式数据将变为
+   const prosyData = new Proxy(data, {
+       //拦截读取操作
+       get(target, key){
+           //如果有值，说明注册过副作用函数了
+           if(acctiveEffect){
+               bucket.add(acctiveEffect);
+           }
+           return target[key]
+       },
+       set(target, key, val){
+   	    target[key] = val;
+           //依次执行副作用函数
+       	bucket.forEach(fn=>fn());
+           //返回true代表设置操作成功
+           return true;
+   }
+   })
+   ```
+   
+   :::
+   
+   上面的代码实现了data数据的响应式，但是它有一个问题，就是对data所有属性的访问和设置都会执行一遍相同副作用函数，这并不是我们想要的，我们想要的是对于每个属性的操作，能够有不同的副作用函数。
+   
+   ::: details
+   
+   ```js
+   const bucket = new WeakMap();
+   const obj = new Proxy(data, {
+       get(target, key){
+           //如果没有副作用函数，直接返回
+           if(!activeEffect) return;
+           //根据target从桶中取出depsMap
+           let depsMap = bucket.get(target);
+           if(!depsMap){ //如果没有，则新建
+               bucket.set(target, (depsMap = new Map()))
+           }
+           //再根据key从depsMap中取出副作用函数集合
+           let deps = depsMap.get(key);
+           if(!deps){
+               depsMap.set(key, (deps = new Set()))
+           }
+           deps.add(activeEffect);
+           return target[key]
+       },
+       set(target, key, value){
+           target[key] = value;
+           const depsMap = bucket.get(target);
+           if(!depsMap) return;
+           const deps = deps.get(key);
+   		deps&&deps.forEach(fn=>fn());
+       }
+   })
+   ```
+   
+   :::
+   
+   ![image-20220503110347493](https://gitlab.com/lixiangteam/blogImg/uploads/3f2177e28553acd9dea3eeecd4682cb8/image-20220503110347493.png)
+
+上面直接将收集副作用函数和重新执行副作用函数放在get和set拦截中，更好的做法是将他们封装到函数中。
+
+::: details 进一步的封装
+
+```js
+const bucket = new WeakMap();
+const obj = new Proxy(data, {
+    get(target, key){
+        track(target, key);
+        return target[key]
+    },
+    set(target, key, value){
+        target[key] = value;
+        trigger(target, key);
+    }
+})
+
+function track(target, key){
+    //如果没有副作用函数，直接返回
+        if(!activeEffect) return;
+        //根据target从桶中取出depsMap
+        let depsMap = bucket.get(target);
+        if(!depsMap){ //如果没有，则新建
+            bucket.set(target, (depsMap = new Map()))
+        }
+        //再根据key从depsMap中取出副作用函数集合
+        let deps = depsMap.get(key);
+        if(!deps){
+            depsMap.set(key, (deps = new Set()))
+        }
+        deps.add(activeEffect);
+}
+function trigger(target, key){
+    const depsMap = bucket.get(target);
+    if(!depsMap) return;
+    const deps = deps.get(key);
+    deps&&deps.forEach(fn=>fn());
+}
+```
+
+:::
