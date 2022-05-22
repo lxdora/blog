@@ -524,3 +524,60 @@ function trigger(target, key){
 ```
 
 :::
+
+2. 分支切换
+
+   ```js
+   const data = {ok: true, text: 'hello'}
+   const obj = new Proxy(data, {})
+   
+   effect(function effectFn(){
+       document.body.innerText = obj.ok?obj.text:'not'
+   })
+   ```
+
+   上面的副作用函数中存在一个三元表达式，当effectFn执行时，由于obj.ok默认为true，所以会同时读取obj.ok和obj.text,此时副作用函数effectFn与响应式数据的联系如下：
+
+   ![image-20220522145603472](https://gitlab.com/lixiangteam/blogImg/uploads/74f75cafae8e7b56df4ff9ede0c1c822/image-20220522145603472.png)
+
+当obj.ok变为false后，此时已经不需要再读取obj.text的值，当时obj.text与副作用函数建立的依赖仍然存在，所以即使obj.text的改变不会影响到document.body.innerText的值，但是仍然会执行副作用函数，这就产生了不必要的性能消耗。为了解决这个问题，可以在每次副作用函数执行时，先将它从所有与之关联的以来集合中删除。当副作用函数执行完毕后，会重新建立联系，新的联系中已经不包含遗留的副作用函数。
+
+要将一个副作用函数从所有的依赖集合中删除，就需要知道它被包含在哪些集合中。为此，在effect函数中为effectFn函数添加了deps属性，用来存储所有包含该副作用函数的依赖集合。
+
+::: details 依赖集合
+
+```js
+let activeEffect ;
+//副作用函数注册器
+function effect(fn){
+    const effectFn = ()=>{
+        //当副作用函数执行时，将当前执行的副作用函数赋值给activeEffect
+        activeEffect = effectFn
+        fn()
+    }
+    //用来存储所有与该副作用函数相关联的集合
+    effectFn.deps = []
+    //执行副作用函数
+    effectFn()
+}
+
+//在track的时候收集依赖集合
+function track(target, key){
+    if(!activeEffect) return;
+    let depsMap = bucket.get(target);
+    if(!despMap){
+        bucket.set(target, (depsMap = new Map()))
+    }
+    let deps = depsMap.get(key)
+    if(!deps){
+        depsMap.set(key, (deps = new Set()))
+    }
+    //将当前激活的副作用函数添加到依赖集合中
+    deps.add(activeEffect)
+    //deps就是与当前副作用函数存在联系的依赖集合
+    activeEffect.deps.push(deps)
+}
+```
+
+:::
+
