@@ -1,0 +1,1 @@
+import{_ as t,c as o,b as a,r,o as n}from"./app.dbd27a4d.js";const u='{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"index.md","lastUpdated":1653635450000}',s={};function c(d,p,_,i,l,m){const e=r("Poetry");return n(),o("div",null,[a(e)])}var x=t(s,[["render",c]]);export{u as __pageData,x as default};
